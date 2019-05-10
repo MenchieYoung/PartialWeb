@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{ title }}</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{{ url_for( 'static', filename='images/favicon.ico') }}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='css/bootstrap.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='css/font-awesome.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='css/animate.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='css/hamburgers.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='css/select2.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='css/util.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='css/main.css') }}">
+<!--===============================================================================================-->
+	<script>
+	function validateForm() {
+		document.getElementById("gif").style.visibility = "visible";
+	}
+	</script>
+
+</head>
+<body>
+	<div class="bg-contact2" style="background-image: url('{{ url_for( 'static', filename='images/dog2.jpg') }}');">
+		<div class="container-contact2">
+			<div class="wrap-contact2">
+                <form class="contact2-form validate-form" name="login_form" id="login_form" action="" onsubmit="return validateForm()" method="POST" novalidate>
+					<span class="contact2-form-title">
+						&#x1F92C; {{ title }}
+					</span>
+                    <div class="container-contact2-form-btn">
+                        <div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<a href="{{ url_for('query') }}" class="contact2-form-btn" role="button">Check for Your Own Sentence &#x1F609;</a>
+						</div>
+                    </div>
+
+
+                    <div class="container-contact2-form-btn">
+                        <div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<a href="{{ url_for('line') }}" class="contact2-form-btn" role="button">Look at the Chart &#x1F920;</a>
+						</div>
+					</div>
+                </form>
+			</div>
+		</div>
+	</div>
+
+
+
+<!--===============================================================================================-->
+	<script src="{{ url_for( 'static', filename='js/jquery-3.2.1.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for( 'static', filename='js/popper.js') }}"></script>
+	<script src="{{ url_for( 'static', filename='js/bootstrap.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for( 'static', filename='js/select2.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for( 'static', filename='js/main.js') }}"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+
+</body>
+</html>

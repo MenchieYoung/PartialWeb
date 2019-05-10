@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <style type="text/css">
+        .header{
+            text-align: center;
+            background-color: rgb(136, 185, 229);
+            height: 70px;
+            line-height: 70px;
+        }
+        .chart{
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+
+     <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>  <!--Press option+enter, then download it-->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Plotly.js -->
+    <!--script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script-->
+    <script src="https://cdn.plot.ly/plotly-basic-latest.js "></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="header">
+        <h2>
+            Offensive vs Non-offensive
+        </h2>
+    </div>
+    <div id="myDiv">
+    <script type="text/javascript">
+        var socket = io();
+        socket.on('temp', function(temp) {
+            $('#messages').html(temp);
+            plotDiv = document.getElementById('myDiv');
+            layout = {
+                hovermode: 'closest',
+                title: "Live Data Streaming",
+                xaxis: {
+                    title: "X Axis",
+                    autorange: true,
+                    titlefont: {
+                        family: "Verdana, Sans-serif",
+                        size: 18,
+                        color: "#7f7f7f"
+                    }
+                },
+                yaxis: {
+                    title: "Live Data",
+                    autorange: true,
+                    titlefont: {
+                        family: "Verdana, Sans-serif",
+                        size: 18,
+                        color: "#7f7f7f"
+                    }
+                }
+            };
+
+            var data = [{
+                x: [0],
+                y: [0]
+            }];
+
+            Plotly.plot(plotDiv, data, layout);
+
+            var i = 1;
+            setInterval(function () {
+                socket.once('temp', function (temp) {
+                    var update = {x: [[i]], y: [[temp]]};
+                    i++;
+                    Plotly.extendTraces(plotDiv, update, [0], 100);
+                });
+
+                $('#stop').click(function () {
+                    clearInterval(loop);
+                });
+            }, 5000);
+
+            plotDiv.on('plotly_click', function (data) {
+                var pts = '';
+                for (var i = 0; i < data.points.length; i++) {
+                    pts = 'x = ' + data.points[i].x + '\ny = ' +
+                        data.points[i].y.toPrecision(4) + '\n\n';
+                }
+                alert('Data point clicked is located at:\n\n' + pts);
+            });
+        });
+    </script>
+</div>
+</body>
+
+</html>

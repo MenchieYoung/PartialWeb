@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+    <title>Pusher Test</title>
+    <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-basic-latest.js"></script>
+    <!-- import Pusher-js library -->
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CryptoLiveChart!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <style>
+        .chart {
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+{#  <h1>Pusher Test</h1>#}
+{#  <p>#}
+{#    Try publishing an event to channel <code>my-channel</code>#}
+{#    with event name <code>my-event</code>.#}
+{#  </p>#}
+  <section class="section">
+        <div class="container">
+            <h1 class="title">Welcome to <strong>Our Live Chart!</strong>&#x1F973;</h1>
+            <p class="subtitle">View live Toxic or Non-toxic for <strong>Youtube</strong><strong> Comments</strong> in Real Time!</p>
+            <hr>
+            <div class="columns">
+                <div class="column">
+                    <h5 class="title is-6">Number of Toxic and Clean Comments in 5-second Windows</h5>
+                    <div id="graph" class="chart">
+                        Graph
+                    </div>
+                </div>
+                <div class="column">
+                    <h5 class="title is-6">Total Number of Toxic and Clean Comments</h5>
+                    <div id="bar" class="chart">
+                        Bar Chart
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        const pusher = new Pusher('c59fd709902404374e57', {
+          cluster: 'us2',
+          forceTLS: true
+        });
+
+        const channel = pusher.subscribe('my-channel');
+        // listen for relevant events
+          channel.bind('my-event', data => {
+          const graph = JSON.parse(data.graph);
+          Plotly.newPlot('graph', graph);
+          const bar_chart = JSON.parse(data.bar_chart);
+          Plotly.newPlot('bar', bar_chart);
+          });
+  </script>
+</body>

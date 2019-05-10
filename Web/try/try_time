@@ -1,0 +1,11 @@
+#import time
+# print(time.time())
+# print(time.strftime('%H:%M:%S'))
+# initial_time = time.strftime('%H:%M:%S')
+# print(initial_time)
+
+def func():
+    return 1, 2
+
+print(func()[0])
+print(func()[1])
